@@ -2,19 +2,19 @@ pipeline {
     agent any
 
     stages {
-        stage('Dockerize') {
-            steps {
-                sh 'docker build -t $DOCKERHUB_USERNAME/edureka_project .'
-            }
-        }
 
-        stage('Push to Docker Hub') {
-            steps {
-                withCredentials([usernamePassword(credentialsId: 'dockerhub-creds', usernameVariable: 'DOCKERHUB_USERNAME', passwordVariable: 'DOCKERHUB_PASSWORD')]) {
-                    sh 'docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD'
-                    sh 'docker push $DOCKERHUB_USERNAME/edureka_project
+        stage('Build docker image'){
+            steps{
+                script{
+                    sh 'docker build -t Itz-Me-Jay/devops-integration .'
                 }
             }
         }
-    }
+        stage('Push image to Hub'){
+            steps{
+                script{
+                   withCredentials([string(credentialsId: 'dockerhub-pwd', variable: 'dockerhubpwd')]) {
+                   sh 'docker login -u javatechie -p ${dockerhubpwd}'
+
 }
+                   sh 'docker push javatechie/devops-integration'
