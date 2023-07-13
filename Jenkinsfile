@@ -10,7 +10,7 @@ pipeline {
 
         stage('Dockerize') {
             steps {
-                sh "docker build -t $DOCKERHUB_USERNAME/edureka_project:demo_2 ."
+                sh "docker build -t $DOCKERHUB_USERNAME/edureka_project"
             }
         }
 
@@ -18,7 +18,7 @@ pipeline {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'dockerhub-creds', usernameVariable: 'DOCKERHUB_USERNAME', passwordVariable: 'DOCKERHUB_PASSWORD')]) {
                     sh 'docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD'
-                    sh 'docker push $DOCKERHUB_USERNAME/edureka_project:demo_2
+                    sh 'docker push $DOCKERHUB_USERNAME/edureka_project
                 }
             }
         }
