@@ -2,12 +2,6 @@ pipeline {
     agent any
 
     stages {
-        stage('Build') {
-            steps {
-                sh './gradlew build'
-            }
-        }
-
         stage('Dockerize') {
             steps {
                 sh "docker build -t $DOCKERHUB_USERNAME/edureka_project ."
