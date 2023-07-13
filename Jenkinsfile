@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Dockerize') {
             steps {
-                sh "docker build -t $DOCKERHUB_USERNAME/edureka_project ."
+                sh 'docker build -t $DOCKERHUB_USERNAME/edureka_project .'
             }
         }
 
